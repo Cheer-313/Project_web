@@ -1,0 +1,365 @@
+:root {
+  --primary-button: linear-gradient(0deg, rgb(11, 90, 11), rgb(126, 199, 10));
+  --primary-color:  rgb(37, 196, 37);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color: #333;  
+  font-size: 62.5%;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Form login + register */
+.main {
+  background-image: url(./image_2.gif);
+  background-repeat: round;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* background-image: linear-gradient(45deg, rgb(11, 90, 11), rgb(199, 196, 10)); */
+}
+
+.form {
+  width: 400px;
+  min-height: 100px;
+  padding: 32px 28px;
+  text-align: center;
+  background: #fff;
+  border-radius: 32px;
+  align-self: center;
+  box-shadow: 0 2px 4px 0 rgb(51, 62, 73);
+  /* box-shadow: 0 2px 4px 0 rgba(167, 182, 197, 0.4); */
+  z-index: 1;
+}
+
+#form-1 {
+  width: 750px;
+}
+
+#form-1 .space {
+  margin-top: 24px;
+}
+
+.form .heading {
+  font-size: 2.8rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.form .desc {
+  text-align: center;
+  color: #636d77;
+  font-size: 1.6rem;
+  font-weight: lighter;
+  line-height: 2.4rem;
+  margin-top: 16px;
+  font-weight: 300;
+}
+
+.form-group-parent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group-parent .form-control {
+  width: 330px;
+}
+
+.form-group-parent .phone_dateofbirth .form-control {
+  width: 80%;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: column;
+}
+
+.form-label,
+.form-message {
+  text-align: left;
+}
+
+.form-label {
+  font-weight: 700;
+  padding-bottom: 6px;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+}
+
+.form-control {
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  outline: none;
+  font-size: 1.4rem;
+}
+
+.form-control:hover {
+  border-color: #1dbfaf;
+}
+
+.form-group.invalid .form-control {
+  border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+  color: #f33a58;
+}
+
+.form-message {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  padding: 4px 0 0;
+}
+
+.form-submit {
+  outline: none;
+  background-image: var(--primary-button);
+  margin-top: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#form-1 .form-submit {
+  width: 50%;
+}
+
+.form-submit:hover {
+  background-color: #1ac7b6;
+}
+
+.space {
+  margin-top: 36px;
+}
+
+.form-nav-login {
+  font-size: 1.3rem;
+  margin-top: 12px;
+}
+
+.form-nav-login-link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.form-nav-login-link:hover {
+  text-decoration: underline;
+}
+
+::placeholder {
+  font-size: 1.3rem;
+}
+
+.form-group-remember {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-group-remember-left {
+  display: flex;
+  align-items: center;
+}
+
+.form-group-remember .form-label{
+  position: relative;
+  top: 3px;
+  padding-left: 6px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.form-group-remember-right .forgot-password {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 1.2rem
+}
+
+.form-group-remember-right .forgot-password:hover {
+  text-decoration: underline;
+}
+
+.phone_dateofbirth {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Home CSS */
+.home-app {
+  height: 100vh;
+  /* background: red; */
+}
+
+.home-app .header-home {
+  background-color: white;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-home .header__list-right {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding-right: 24px;
+  margin-bottom: 0;
+}
+
+.header-home .header__list-left {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding-left: 24px;
+  margin-bottom: 0;
+}
+
+.header__list-left-item {
+  margin-right: 12px;
+  font-size: 2rem;
+}
+
+.header__left-item-img {
+  line-height: 64px;
+  position: relative;
+  top: 1px;
+}
+
+.header__list-right-item {
+  margin-left: 16px;
+  font-size: 2rem;
+}
+
+.header__list-right-item-img {
+  position: relative;
+  top: -2px;
+}
+
+.header__list-right-item-name {
+  font-size: 1.4rem;
+}
+
+/*  */
+.app-container {
+  margin-top: 128px;
+}
+
+.grid__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -5px;
+  margin-right: 200px;
+}
+
+.card-item {
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  margin: 20px 12px 0px;
+  transition: transform ease-in-out 0.1s;
+  will-change: transform;;
+}
+
+.card-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+.card-item-img {
+  background-image: url(https://gstatic.com/classroom/themes/img_violin2.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-top: calc(100% - 20px);
+  border-radius: 4px 4px 0 0;
+}
+
+.card-item .card-body {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 2.2rem;
+  height: 40px;
+}
+
+.card-body-icon {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+  color: #5f6368;
+  padding: 4px 8px;
+}
+
+.card-body-icon:hover {
+  text-decoration: none;
+  color: #73767a;
+}
+
+.card-item-label {
+  position: absolute;
+  top: calc(20% + 20px);
+  left: 0;
+  padding: 0 12px;
+}
+
+.card-item-label-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.card-item-label-link:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.card-item-label-course {
+  line-height: 2.4rem;
+  font-weight: 700;
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.card-item-label-name {
+  font-size: 1.4rem;
+}
+
+.card-item-options {
+  position: absolute;
+  top: 5%;
+  right: 6%;
+  font-size: 1.6rem;
+  color: rgba(245, 241, 241, 0.9);
+}
+
+.card-item-options:hover {
+  position: absolute;
+  top: 5%;
+  right: 6%;
+  font-size: 1.6rem;
+  color: rgba(209, 203, 203, 0.9);
+}
