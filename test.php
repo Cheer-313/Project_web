@@ -1,4 +1,5 @@
 <?php 
 	require_once('db.php');
-	var_dump(is_email_exists('admin@gmail.com'));
+	$result =var_dump(send_reset_email('blightmedison313@gmail.com','hello_world'));
+	return $result;
  ?>

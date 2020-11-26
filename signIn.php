@@ -32,10 +32,6 @@
             else{
                 $error = 'Cant login';
             }
-            // if($username = 'admin321' && $password = 'admin123'){
-            //     header('Location: home.php');
-            //     exit();
-            // }
         }
     ?>
     <div class="main">
@@ -63,7 +59,7 @@
                     <label for="remember" class="form-label">Remember me</label>
                 </div>
                 <div class="form-group-remember-right">
-                    <a href="" class="forgot-password">Forgot Password?</a>
+                    <a href="forgotPass.php" class="forgot-password">Forgot Password?</a>
                 </div>
             </div>
 

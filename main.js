@@ -168,3 +168,12 @@ checkInput({
         checkInput.minLength('#password', 6)
     ]
 });
+
+checkInput({
+    form: '#form-3',
+    errorSelector: '.form-message',
+    rules: [
+        checkInput.isRequired('#email'),
+        checkInput.isEmail('#email')
+    ]
+});
