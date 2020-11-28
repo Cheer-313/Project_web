@@ -199,7 +199,7 @@
 	function add_class($classname, $subject, $classroom, $email, $chooseImage){
 
 		$date_create = (date("d-m-Y",time())); //Ngày tạo class
-		$token = md5($classname.'+'.$email); //Tạo mã code class
+		$token = md5($classname.'+'.$email.'+'.random_int(1000,3000)); //Tạo mã code class
 
 		$sql = 'INSERT INTO classroom(classname, subject, room, email, img, date_create, token) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
@@ -212,20 +212,111 @@
 		}
 
 		return array('code' => 0, 'error' => 'Add class successfully');
-
 	}
 
-	function join_class($token){
-		$sql = 'select * from classroom where token = ?';
+	function join_class($email, $token){
+		$sql = 'select * from classroom where token = ?'; //Kiem tra classcode|token
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		$stm->bind_param('s', $token);
+
+		if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+		}
+
+		if($stm->affected_rows != 0){
+			$sql = 'INSERT INTO user_classroom VALUES (?,?)';
+			$conn = open_db();
+			$stm = $conn->prepare($sql);
+			$stm->bind_param('ss', $email, $token);
+
+			if(!$stm->execute()){
+				return array('code' => 3, 'error' => 'Cant execute statement insert');
+			}
+			return array('code' => 0, 'msg' => 'Join class successfully');
+		}
+		else{
+			return array('code' => 1, 'error' => 'Dont find any classes');
+		}
+		
+	}
+
+	function get_permission($email){
+		$sql = 'SELECT * FROM user WHERE email =?';
 
 		$conn = open_db();
 		$stm = $conn->prepare($sql);
-		$stm->bind_param('s',$token);
+		$stm->bind_param('s',$email);
 
 		if(!$stm->execute()){
-			return array('code' => 1, 'error' => 'Cant Execute');
+			return array('code' => 2, 'error' => 'Cant execute statement');
 		}
 
-		return array('code' => 0, 'error' => 'Join class successfully');
+		$result =  $stm->get_result();
+		if ($result->num_rows == 0) {
+			return null;
+		}
+		$data = $result->fetch_assoc();
+		return $data['permission'];
+	}
+
+	function get_fullname($email){
+		$sql = 'SELECT * FROM user WHERE email =?';
+
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		$stm->bind_param('s',$email);
+
+		if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+		}
+
+		$result =  $stm->get_result();
+		if ($result->num_rows == 0) {
+			return null;
+		}
+		$data = $result->fetch_assoc();
+		return $data['hoten'];
+	}
+
+	function load_data_home($email, $permission){
+		/* 
+			if permmission == 0 => load all data table classroom
+			if permision == 1 -> load data table classroom where emmail = email.user
+			if permission = 2 => load data table classroom where token in (select token from user_classroom where email = emmail.user)
+		*/
+		$conn = open_db();
+
+		if($permission == 0){
+			$sql = 'select * from classroom';
+			$result = $conn->query($sql);
+			return $result;
+		}
+		else if($permission == 1){
+			$sql = 'select * from classroom where email = ?';
+			$stm = $conn->prepare($sql);
+			$stm->bind_param('s',$email);
+
+			if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+			}
+
+			$result =  $stm->get_result();
+			return $result;
+		}
+
+		else if($permission == 2){
+			$sql = 'select * from classroom where token in (select token from user_classroom where email = ?)';
+			$stm = $conn->prepare($sql);
+			$stm->bind_param('s',$email);
+
+			if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+			}
+
+			$result =  $stm->get_result();
+			return $result;
+		}
+		
 	}
  ?>

@@ -482,17 +482,44 @@ html {
 .card-item-options {
   position: absolute;
   top: 5%;
-  right: 6%;
+  right: 0;
   font-size: 1.6rem;
   color: rgba(245, 241, 241, 0.9);
+  padding: 0 16px 0 24px;
 }
 
 .card-item-options:hover {
-  position: absolute;
-  top: 5%;
-  right: 6%;
-  font-size: 1.6rem;
   color: rgba(209, 203, 203, 0.9);
+}
+
+.card-item-dropdown {
+  position: absolute;
+  top: 97%;
+  right: calc(100% - 32px);
+  list-style: none;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 8px 0;
+  margin: 0;
+  transform-origin: calc(100% - 8px) top;
+  animation: Grow ease-in-out 0.2s;
+  will-change: opacity, transform;
+  display: none;
+}
+
+.card-item-options:hover .card-item-dropdown {
+  display: block;
+}
+
+.card-item-dropdown-item {
+  font-size: 1.4rem;
+  padding: 6px 16px 6px 12px;
+  color: #333;
+}
+
+.card-item-dropdown-item:hover {
+  background-color: #f1f1f1;
 }
 
 /* Modal */
@@ -557,12 +584,47 @@ html {
   justify-content: center;
 }
 
+.auth-form-dialog {
+  width: 330px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: white;
+  margin: auto;
+}
+
+.auth-form__container.auth-form__container-remove {
+  padding: 0 20px;
+}
+
+.auth-form-text {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.auth-form__text-question {
+  font-size: 1.4rem;
+  padding-left: 8px;
+}
+
 .btn-form-add-class {
   margin-right: 12px;
   outline: none;
   background: var(--primary-button);
   border: none;
   padding: 10px 40px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.btn-form-remove-class {
+  margin-right: 12px;
+  outline: none;
+  background: var(--primary-button);
+  border: none;
+  padding: 8px 28px;
   border-radius: 8px;
   color: white;
   font-size: 1.4rem;
@@ -619,9 +681,25 @@ html {
   margin: 0 auto;
 }
 
+.app-container-body-detail {
+  position: relative;
+}
+
 .body-detail-img {
   width: 100%;
   border-radius: 8px;
+}
+
+.body-detail-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  padding-left: 20px;
+}
+
+.body-detail-title-heading {
+  font-weight: 700;
 }
 
 .grid__row-detail-body {

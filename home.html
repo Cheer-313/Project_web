@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require_once("db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,45 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php
-        $data = $_SESSION['data'];
-        $fullname = $data['hoten'];
-
-        if(isset($_POST['classname']) && isset($_POST['subject']) && isset($_POST['classroom']) && isset($_POST['chooseImage'])){
-
-            $classname = $_POST['classname'];
-            $subject = $_POST['subject'];
-            $classroom = $_POST['classroom'];
-            $chooseImage = $_POST['chooseImage'];
-            $email = $data['email'];
-
-            $result = add_class($classname, $subject, $classroom, $email, $chooseImage);
-
-            if($result['code'] == 0){
-                $msg = $result['error'];
-            }
-            else{
-                $msg = $result['error'];
-            }
-        }
-     ?>
-
-     <!-- xu li join_class -->
-     <?php 
-        if(isset($_POST['classcode'])){
-
-            $token = $_POST['classcode'];
-            $email = $data['email'];
-            $result = join_class($email, $token);
-            
-            if($result['code'] == 0){
-                $msg = $result['msg'];
-            }
-            else{
-                $msg = $result['error'];
-            }
-        }
-      ?>
     <div class="home-app">
         <header class="header-home">
             <ul class="header__list-left">
@@ -86,50 +46,64 @@
         <div class="app-container">
             <div class="grid">
                 <div class="grid__row">
-                    <!-- Đổ dữ liệu vào từng khung -->
-                    <?php 
-                        $email = $data['email'];
-                        $result = load_data_home($email,get_permission($email));
-                        if(!empty($result)){
-                            while ($row = $result->fetch_assoc()) {
-                            # code...
-                                $classname = $row['classname'];
-                                $email = $row['email'];
-                                $fullname = get_fullname($email);
-                                echo <<<EOT
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                                        <div class="card-item">
-                                            <div class="card-item-img"></div>
-                                            <div class="card-body">
-                                                <a href="" class="card-body-icon">
-                                                    <i class="far fa-address-book"></i>
-                                                </a>
-                                                <a href="" class="card-body-icon">
-                                                    <i class="far fa-folder-open"></i>
-                                                </a>
-                                            </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <div class="card-item">
+                            <div class="card-item-img"></div>
+                            <div class="card-body">
+                                <a href="" class="card-body-icon">
+                                    <i class="far fa-address-book"></i>
+                                </a>
+                                <a href="" class="card-body-icon">
+                                    <i class="far fa-folder-open"></i>
+                                </a>
+                            </div>
 
-                                            <div class="card-item-label">
-                                                <a href="" class="card-item-label-link">
-                                                    <h4 class="card-item-label-course">$classname</h4>
-                                                </a>
-                                                <span class="card-item-label-name">$fullname</span>
-                                            </div>
+                            <div class="card-item-label">
+                                <a href="" class="card-item-label-link">
+                                    <h4 class="card-item-label-course">HK1_2020_503040_Phân tích và thiết kế giải thuật_N02_1</h4>
+                                </a>
+                                <span class="card-item-label-name">Trịnh Hùng Cường</span>
+                            </div>
 
-                                            <div class="card-item-options">
-                                                <i class="fas fa-ellipsis-v"></i>
+                            <div class="card-item-options">
+                                <i class="fas fa-ellipsis-v"></i>
 
-                                                <ul class="card-item-dropdown">
-                                                    <li class="card-item-dropdown-item card-item-dropdown-item-modify">Modify</li>
-                                                    <li class="card-item-dropdown-item card-item-dropdown-item-remove">Remove</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                EOT;
-                            }
-                        }
-                     ?>
+                                <ul class="card-item-dropdown">
+                                    <li class="card-item-dropdown-item card-item-dropdown-item-modify">Modify</li>
+                                    <li class="card-item-dropdown-item card-item-dropdown-item-remove">Remove</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <div class="card-item">
+                            <div class="card-item-img"></div>
+                            <div class="card-body">
+                                <a href="" class="card-body-icon">
+                                    <i class="far fa-address-book"></i>
+                                </a>
+                                <a href="" class="card-body-icon">
+                                    <i class="far fa-folder-open"></i>
+                                </a>
+                            </div>
+
+                            <div class="card-item-label">
+                                <a href="" class="card-item-label-link">
+                                    <h4 class="card-item-label-course">HK1_2020_503040_Phân tích và thiết kế giải thuật_N02_1</h4>
+                                </a>
+                                <span class="card-item-label-name">Trịnh Hùng Cường</span>
+                            </div>
+
+                            <div class="card-item-options">
+                                <i class="fas fa-ellipsis-v"></i>
+
+                                <ul class="card-item-dropdown">
+                                    <li class="card-item-dropdown-item card-item-dropdown-item-modify">Modify</li>
+                                    <li class="card-item-dropdown-item card-item-dropdown-item-remove">Remove</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -196,17 +196,19 @@ checkInput({
     ]
 });
 
-// Icon Plus + Form add class
+// Icon Plus + Form add class && Remove class
 var plusAddElement = document.querySelector('.header__plus-item-add');
 var ModalElement = document.querySelector('.modal__plus');
 var btnBackElement = document.querySelector('#form-add .btn-back');
 var formjoinElenment = document.querySelector('#form-join');
+var formremoveElement = document.querySelector('#form-remove');
 
 // Xử lý `Add class`
 plusAddElement.onclick = function() {
     ModalElement.style.visibility = 'visible';
     ModalElement.style.display = '';
     formjoinElenment.style.display = 'none';
+    formremoveElement.style.display = 'none';
     formaddElenment.style.display = 'block';
 }
 
@@ -225,6 +227,7 @@ plusJoinElement.onclick = function() {
     ModalElement.style.visibility = 'visible';
     ModalElement.style.display = '';
     formaddElenment.style.display = 'none';
+    formremoveElement.style.display = 'none';
     formjoinElenment.style.display = 'block';
 }
 
@@ -232,3 +235,33 @@ plusJoinElement.onclick = function() {
 btnBackJoinElement.onclick = function() {
     ModalElement.style.display = 'none';
 }
+
+// Xử lý remove class
+var cartItemOptionElement = document.querySelectorAll('.card-item-dropdown-item-remove');
+var btnNoRemoveElement = document.querySelector('#form-remove .btn-back');
+
+cartItemOptionElement.forEach(function(item) {
+    item.onclick = function() {
+        ModalElement.style.visibility = 'visible';
+        ModalElement.style.display = '';
+        formaddElenment.style.display = 'none';
+        formjoinElenment.style.display = 'none';
+        formremoveElement.style.display = 'block';
+    }
+    
+    btnNoRemoveElement.onclick = function() {
+        ModalElement.style.display = 'none';
+    }
+});
+
+// cartItemOptionElement.onclick = function() {
+//     ModalElement.style.visibility = 'visible';
+//     ModalElement.style.display = '';
+//     formaddElenment.style.display = 'none';
+//     formjoinElenment.style.display = 'none';
+//     formremoveElement.style.display = 'block';
+// }
+
+// btnNoRemoveElement.onclick = function() {
+//     ModalElement.style.display = 'none';
+// }

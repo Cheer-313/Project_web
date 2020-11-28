@@ -5,10 +5,18 @@
 	$classroom = 'C401';
 	$email = 'hhung@gmail.com';
 	$chooseImage = '/img.png';*/
+	/*$email = 'hhung@gmail.com';
 
-	$data =login('hhung2', '123456');
-	$_SESSION['data'] = $data;
-	$data1 = $_SESSION['data'];
-	$result = var_dump($data1['hoten']);
-	return $result;
+	$result = var_dump(load_data_home('blightmedison313@gmail.com', 0));
+	$s = load_data_home($email, get_permission($email));
+	while ( $row = $s->fetch_assoc()) {
+		# code...
+		print_r($row);
+	}*/
+	$name = "Nguen Van A";
+	echo <<<EOT
+	My name is "$name". I am printing some food.
+	Now, I am printing some food.
+	This should print a capital 'A': \x41
+	EOT;
  ?>
