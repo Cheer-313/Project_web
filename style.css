@@ -15,9 +15,39 @@ html {
   font-family: "Open Sans", sans-serif;
 }
 
+/* Animation */
+@keyframes Grow {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growth {
+  from {
+    transform: scale(var(--growth-from));
+  }
+  to {
+    transform: scale(var(--growth-to));
+  }
+}
+
 /* Form login + register */
 .main {
-  background-image: url(./image_2.gif);
+  background-image: url(images/image_2.gif);
   background-repeat: round;
   background-size: cover;
   min-height: 100vh;
@@ -36,7 +66,7 @@ html {
   align-self: center;
   box-shadow: 0 2px 4px 0 rgb(51, 62, 73);
   /* box-shadow: 0 2px 4px 0 rgba(167, 182, 197, 0.4); */
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 #form-1 {
@@ -234,9 +264,25 @@ html {
   width: 80%;
 }
 
+/* Reset Password */
+.main-forgot #form-reset {
+  width: 410px;
+  min-height: 100px;
+  padding: 32px 28px;
+  text-align: center;
+  background: #fff;
+  border-radius: 24px;
+  align-self: start;
+  margin-top: 100px;
+  box-shadow: 0 2px 4px 0 rgb(51, 62, 73);
+}
+
 /* Home CSS */
 .home-app {
   height: 100vh;
+  background-image: url(images/backgr_home.png);
+  background-size: cover;
+  background-repeat: round;
 }
 
 .home-app .header-home {
@@ -284,6 +330,55 @@ html {
   font-size: 2rem;
 }
 
+.header__plus {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 40px;
+  cursor: pointer;
+}
+
+.header__plus::before {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 20px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.header__plus:hover .header__plus-list {
+  display: block;
+}
+
+.header__plus-list {
+  position: absolute;
+  top: 150%;
+  right: 1px;
+  width: 90px;
+  list-style: none;
+  font-size: 1.4rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 0;
+  z-index: 2;
+  /*  */
+  transform-origin: calc(100% - 8px) top;
+  animation: Grow ease-in-out 0.2s;
+  will-change: opacity, transform;
+  display: none;
+}
+
+.header__plus-item {
+  padding: 10px 12px;
+}
+
+.header__plus-item:hover {
+  background-color: #f1f1f1;
+}
+
 .header__list-right-item-img {
   position: relative;
   top: -2px;
@@ -295,7 +390,8 @@ html {
 
 /*  */
 .app-container {
-  margin-top: 128px;
+  padding-top: 64px;
+  margin-top: 64px;
 }
 
 .grid__row {
@@ -313,7 +409,8 @@ html {
   margin: auto;
   margin: 20px 12px 0px;
   transition: transform ease-in-out 0.1s;
-  will-change: transform;;
+  will-change: transform;
+  background-color: white;
 }
 
 .card-item:hover {
@@ -322,7 +419,7 @@ html {
 }
 
 .card-item-img {
-  background-image: url(https://gstatic.com/classroom/themes/img_violin2.jpg);
+  background-image: url(images/img_violin2.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   padding-top: calc(100% - 20px);
@@ -396,6 +493,197 @@ html {
   right: 6%;
   font-size: 1.6rem;
   color: rgba(209, 203, 203, 0.9);
+}
+
+/* Modal */
+.modal__plus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: fadeIn linear 0.1s;
+  display: flex;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.modal__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__body {
+  margin: auto;
+  /* position: relative; */
+  z-index: 3;
+  --growth-from: 0.7;
+  --growth-to: 1;
+  animation: growth linear 0.1s;
+}
+
+.auth-form {
+  width: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.auth-form__container {
+  padding: 0 32px;
+}
+
+.auth-form__heading {
+  font-size: 2.8rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  text-align: center;
+}
+
+.auth-form__form .form-control {
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  outline: none;
+  font-size: 1.4rem;
+}
+
+.auth-form__controls {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-form-add-class {
+  margin-right: 12px;
+  outline: none;
+  background: var(--primary-button);
+  border: none;
+  padding: 10px 40px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Detail Class */
+.header__list-left-item.header__list-left-item-inf {
+  padding-left: 6px;
+}
+
+.header__list-left-class {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.header__list-left-teacher-name {
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin: 8px 0 0;
+}
+
+.header__list-center {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-left: -210px;
+}
+
+.header__list-center-item {
+  padding: 0 12px;
+  height: 100%;
+  line-height: 64px;
+}
+
+.header__list-center-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/*  */
+.app-container-detail {
+  padding-top: 32px;
+  margin-top: 64px;
+}
+
+.grid__row-detail {
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.body-detail-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.grid__row-detail-body {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.grid__left {
+  width: 212px;
+}
+
+.grid__left-notify {
+  border: 1px solid #dadce0;
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px 16px;
+}
+
+.grid__left-notify-heading {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.grid__left-notify-message {
+  font-size: 1.3rem;
+  margin: 12px 0;
+  color: rgba(0, 0, 0, 0.549);
+}
+
+.grid__left-notify-view {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.grid__left-notify-link {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.grid__right {
+  width: 764px;
+}
+
+.grid__right-item {
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.grid__right-item-heading {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.grid__right-item-time {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.549);
+  margin: 0;
 }
 
 /* Responsive */

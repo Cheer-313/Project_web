@@ -195,4 +195,37 @@
 
 		return array('code' => 0, 'error' => 'Password is changed successfully');
 	}
+
+	function add_class($classname, $subject, $classroom, $email, $chooseImage){
+
+		$date_create = (date("d-m-Y",time())); //Ngày tạo class
+		$token = md5($classname.'+'.$email); //Tạo mã code class
+
+		$sql = 'INSERT INTO classroom(classname, subject, room, email, img, date_create, token) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		$stm->bind_param('sssssss',$classname, $subject, $classroom, $email, $chooseImage, $date_create, $token);
+
+		if(!$stm->execute()){
+			return array('code' => 1, 'error' => 'Cant Execute');
+		}
+
+		return array('code' => 0, 'error' => 'Add class successfully');
+
+	}
+
+	function join_class($token){
+		$sql = 'select * from classroom where token = ?';
+
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		$stm->bind_param('s',$token);
+
+		if(!$stm->execute()){
+			return array('code' => 1, 'error' => 'Cant Execute');
+		}
+
+		return array('code' => 0, 'error' => 'Join class successfully');
+	}
  ?>

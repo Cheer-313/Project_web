@@ -26,6 +26,7 @@
             $data = login($username, $password);
             if($data){
                 $_SESSION['username'] = $username;
+                $_SESSION['data'] = $data;
                 header('Location: home.php');
                 exit();
             }

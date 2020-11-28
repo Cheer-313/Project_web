@@ -177,3 +177,58 @@ checkInput({
         checkInput.isEmail('#email')
     ]
 });
+
+checkInput({
+    form: '#form-add',
+    errorSelector: '.form-message',
+    rules: [
+        checkInput.isRequired('#classname'),
+        checkInput.isRequired('#subject'),
+        checkInput.isRequired('#classroom')
+    ]
+});
+
+checkInput({
+    form: '#form-join',
+    errorSelector: '.form-message',
+    rules: [
+        checkInput.isRequired('#classcode')
+    ]
+});
+
+// Icon Plus + Form add class
+var plusAddElement = document.querySelector('.header__plus-item-add');
+var ModalElement = document.querySelector('.modal__plus');
+var btnBackElement = document.querySelector('#form-add .btn-back');
+var formjoinElenment = document.querySelector('#form-join');
+
+// Xử lý `Add class`
+plusAddElement.onclick = function() {
+    ModalElement.style.visibility = 'visible';
+    ModalElement.style.display = '';
+    formjoinElenment.style.display = 'none';
+    formaddElenment.style.display = 'block';
+}
+
+// Xử lý btn back
+btnBackElement.onclick = function() {
+    ModalElement.style.display = 'none';
+}
+
+// Form join class
+var plusJoinElement = document.querySelector('.header__plus-item-join');
+var btnBackJoinElement = document.querySelector('#form-join .btn-back');
+var formaddElenment = document.querySelector('#form-add');
+
+// Xử lý `Join class`
+plusJoinElement.onclick = function() {
+    ModalElement.style.visibility = 'visible';
+    ModalElement.style.display = '';
+    formaddElenment.style.display = 'none';
+    formjoinElenment.style.display = 'block';
+}
+
+// Xử lý btn back
+btnBackJoinElement.onclick = function() {
+    ModalElement.style.display = 'none';
+}
