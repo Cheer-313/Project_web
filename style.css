@@ -669,6 +669,16 @@ html {
   cursor: pointer;
 }
 
+.header__list-center-item-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.header__list-center-item-link:hover {
+  text-decoration: none;
+  color: #333;
+}
+
 /*  */
 .app-container-detail {
   padding-top: 32px;
@@ -762,6 +772,61 @@ html {
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.549);
   margin: 0;
+}
+
+.grid__row-detail-member {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.body-detail-member-title {
+  color: #1967d2;
+  padding-left: 16px;
+  font-size: 32px;
+}
+
+.body-detail-separator {
+  border-top: 2px solid #1967d2;
+  margin-bottom: 0;
+}
+
+.body-detail-separator-classmate {
+  border-top: 2px solid #1967d2;
+  margin: 10px 0 0;
+}
+
+.body-detail-teachers-list,
+.body-detail-students-list {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.body-detail-teachers-item,
+.body-detail-students-item {
+  padding: 20px 0px 19px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.body-detail-teachers-item:last-child,
+.body-detail-students-item:last-child {
+  border: none;
+  padding-bottom: 20px;
+  margin-bottom: 100px;
+}
+
+.body-detail-students-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body-detail-student-quantity {
+  position: relative;
+  top: 12px;
+  right: 20px;
+  color: #1967d2;
+  font-weight: 700;
 }
 
 /* Responsive */

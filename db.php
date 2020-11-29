@@ -240,7 +240,7 @@
 		}
 		
 	}
-
+	//Lay permission user theo email
 	function get_permission($email){
 		$sql = 'SELECT * FROM user WHERE email =?';
 
@@ -260,6 +260,7 @@
 		return $data['permission'];
 	}
 
+	//Lay fullname user theo email
 	function get_fullname($email){
 		$sql = 'SELECT * FROM user WHERE email =?';
 
@@ -318,5 +319,21 @@
 			return $result;
 		}
 		
+	}
+
+	//Lay thong tin lop hoc theo token
+	function get_detail_class($token){
+		$sql = 'select * from classroom where token = ?';
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		$stm->bind_param('s',$token);
+
+		if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+		}
+
+		$result =  $stm->get_result();
+		$data = $result->fetch_assoc();
+		return $data;
 	}
  ?>

@@ -95,6 +95,7 @@
                             # code...
                                 $classname = $row['classname'];
                                 $email = $row['email'];
+                                $token = $row['token'];
                                 $fullname = get_fullname($email);
                                 echo <<<EOT
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
@@ -110,7 +111,7 @@
                                             </div>
 
                                             <div class="card-item-label">
-                                                <a href="" class="card-item-label-link">
+                                                <a href="http://localhost:8088/Project_web/detailClass.php?token=$token" class="card-item-label-link">
                                                     <h4 class="card-item-label-course">$classname</h4>
                                                 </a>
                                                 <span class="card-item-label-name">$fullname</span>

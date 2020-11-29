@@ -254,14 +254,28 @@ cartItemOptionElement.forEach(function(item) {
     }
 });
 
-// cartItemOptionElement.onclick = function() {
-//     ModalElement.style.visibility = 'visible';
-//     ModalElement.style.display = '';
-//     formaddElenment.style.display = 'none';
-//     formjoinElenment.style.display = 'none';
-//     formremoveElement.style.display = 'block';
+// Xử lý trong detail class
+// var homeAppStreamElement = document.querySelector('.home-app-stream');
+// var homeAppPeopleElement = document.querySelector('.home-app-list-member');
+
+// var streamElement = document.querySelector('.header__list-center-item-stream');
+// var peopleElement = document.querySelector('.header__list-center-item-people');
+// console.log(streamElement);
+// console.log(peopleElement);
+// // Xử lý stream
+// streamElement.onclick = function() {
+//     console.log('hi')
+//     streamElement.style.color = '#1967d2';
+//     peopleElement.style.color = '';
+//     homeAppPeopleElement.style.display = 'none';
+//     homeAppStreamElement.style.display = 'block';
 // }
 
-// btnNoRemoveElement.onclick = function() {
-//     ModalElement.style.display = 'none';
+// // Xử lý People
+// peopleElement.onclick = function() {
+//     console.log('hi')
+//     peopleElement.style.color = '#1967d2';
+//     streamElement.style.color = '';
+//     homeAppStreamElement.style.display = 'none';
+//     homeAppPeopleElement.style.display = 'block'
 // }
