@@ -36,6 +36,8 @@
             else{
                 $msg = $result['error'];
             }
+            header("Location: home.php");
+            exit();
         }
      ?>
 
@@ -130,6 +132,15 @@
                                 EOT;
                             }
                         }
+                        if(isset($_POST['btnYes'])){
+                            $result = delete_class($token);
+                            if(!$result){
+                                echo'error';
+                            }
+                            unset($_POST);
+                            header("Location: home.php");
+                            exit();
+                        }
                      ?>
                 </div>
             </div>
@@ -216,8 +227,54 @@
                         </div>
 
                         <div class="auth-form__controls">
-                            <button class="btn-form-remove-class">Yes</button>
+                            <button class="btn-form-remove-class" name="btnYes">Yes</button>
                             <button type="button" class="btn-form-remove-class btn-back">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form modify -->
+            <div class="auth-form">
+                <div class="auth-form__container">
+
+                    <form action="" method="POST" id="form-modify">
+                        <h3 class="auth-form__heading">MODIFY CLASS</h3>
+
+                        <div class="auth-form__form">
+                            <div class="form-group">
+                                <label for="classname" class="form-label">Classname</label>
+                                <input type="text" name="classname" class="form-control" id="classname" placeholder="Enter your classname">
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject title">
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="classroom" class="form-label">Classroom</label>
+                                <input type="text" name="classroom" class="form-control" id="classroom" placeholder="Classroom">
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chooseImage" class="form-label">Images</label>
+                                <select name="chooseImage" id="chooseImage" class="form-control">
+                                    <option value="images/img_violin2.jpg">Image violin</option>
+                                    <option value="images/img_learnlanguage.jpg">Image learn language</option>
+                                    <option value="images/img_breakfast.jpg">Image breakfast</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="auth-form__controls">
+                            <button type="button" class="btn-form-add-class btn-back">Back</button>
+                            <button class="btn-form-add-class">Modify</button>
                         </div>
                     </form>
                 </div>

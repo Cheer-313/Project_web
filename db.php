@@ -336,4 +336,36 @@
 		$data = $result->fetch_assoc();
 		return $data;
 	}
+
+	function delete_class($token){
+		/* 
+			if permmission == 0 => delete all data table classroom and user_classroom
+			if permision == 1 -> delete all data table classroom and user_classroom emmail = email.teacher
+			if permission = 2 => delete all data table user_classroom where token = token.classroom
+		*/
+	    $sql = 'delete from classroom where token = ?';
+	    $conn = open_db();
+	    $stm = $conn -> prepare($sql);
+	    $stm -> bind_param('s',$token);
+	    if($stm -> execute()){
+	        return true;
+        }
+	    else{
+	        return false;
+        }
+    }
+    function modify_class($classname, $subject, $classroom, $token, $chooseImage){
+	    $sql = "update classroom set classname =$classname,subject=$subject,classroom=$classroom,chooseImage=$chooseImage where token =?";
+        $conn = open_db();
+        $stm = $conn -> prepare($sql);
+        $stm -> bind_param('s',$token);
+        if($stm -> execute()){
+            echo "Update successful";
+            return true;
+        }
+        else{
+            echo "Update fail";
+            return false;
+        }
+    }
  ?>

@@ -523,7 +523,8 @@ html {
 }
 
 /* Modal */
-.modal__plus {
+.modal__plus,
+.modal__add-student {
   position: fixed;
   top: 0;
   left: 0;
@@ -672,6 +673,7 @@ html {
 .header__list-center-item-link {
   text-decoration: none;
   color: #333;
+  padding: 32px 0;
 }
 
 .header__list-center-item-link:hover {
@@ -786,11 +788,6 @@ html {
   font-size: 32px;
 }
 
-.body-detail-separator {
-  border-top: 2px solid #1967d2;
-  margin-bottom: 0;
-}
-
 .body-detail-separator-classmate {
   border-top: 2px solid #1967d2;
   margin: 10px 0 0;
@@ -827,6 +824,18 @@ html {
   right: 20px;
   color: #1967d2;
   font-weight: 700;
+}
+
+.body-detail-student-quantity-title {
+  margin-right: 12px;
+}
+
+.body-detail-student-icon-add {
+  font-size: 2rem;
+}
+
+.body-detail-student-icon-add:hover {
+  cursor: pointer;
 }
 
 /* Responsive */

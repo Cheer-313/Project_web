@@ -1,7 +1,3 @@
-<?php
-    session_start();
-    require_once("db.php");
- ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,20 +12,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php 
-        $data = $_SESSION['data'];
-        $fullname_user = $data['hoten'];
-        $token = '';
-        $fullname= '';
-        $classname = '';
-
-        if(isset($_GET['token'])){
-            $token = $_GET['token'];
-            $result = get_detail_class($token);
-            $classname = $result['classname'];
-            $fullname = get_fullname($result['email']);
-        }
-     ?>
     <div class="home-app">
         <header class="header-home">
             <ul class="header__list-left">
@@ -37,20 +19,20 @@
                     <i class="fas fa-bars"></i>
                 </li>
                 <li class="header__list-left-item header__list-left-item-inf">
-                    <h4 class="header__list-left-class"><?= $classname ?></h4>
-                    <h5 class="header__list-left-teacher-name"><?= $fullname ?></h5>
+                    <h4 class="header__list-left-class">HK1_2020_503040_Phân tích và thiết kế giải thuật_N02_1</h4>
+                    <h5 class="header__list-left-teacher-name">Trịnh Hùng Cường</h5>
                 </li>
             </ul>
             
             <ul class="header__list-center">
                 <li class="header__list-center-item">
-                    <a href="http://localhost:8088/Project_web/detailClass.php?token=$token" class="header__list-center-item-link">Stream</a>
+                    <a href="detailClass.html" class="header__list-center-item-link">Stream</a>
                 </li>
                 <li class="header__list-center-item">
                     <a href="" class="header__list-center-item-link">Classwork</a>
                 </li>
                 <li class="header__list-center-item">
-                    <a href="http://localhost:8088/Project_web/people.php?token=$token" class="header__list-center-item-link">People</a>
+                    <a href="people.html" class="header__list-center-item-link">People</a>
                 </li>
             </ul>
 
@@ -58,7 +40,7 @@
                 <li class="header__list-right-item">
                     <img src="https://img.icons8.com/material/24/000000/circled-menu.png" class="header__list-right-item-img">
                 </li>
-                <li class="header__list-right-item header__list-right-item-name"><?= $fullname_user ?></li>
+                <li class="header__list-right-item header__list-right-item-name">Trương Minh Hưng</li>
             </ul>
         </header>
 
@@ -66,8 +48,13 @@
             <div class="grid">
                 <div class="grid__row-detail-member">
                     <div class="app-container-body-detail">
-                        <h2 class="body-detail-member-title">Teachers</h2>
-                        <hr class="body-detail-separator">
+                        <div class="body-detail-students-heading">
+                            <h2 class="body-detail-member-title">Teachers</h2>
+                            <div class="body-detail-student-quantity">
+                                <i class="fas fa-user-plus body-detail-student-icon-add"></i>
+                            </div>
+                        </div>
+                        <hr class="body-detail-separator-classmate">
                         <ul class="body-detail-teachers-list">
                             <li class="body-detail-teachers-item">Mai Văn Mạnh</li>
                             <li class="body-detail-teachers-item">Khoa công nghệ thông tin</li>
@@ -76,7 +63,8 @@
                         <div class="body-detail-students-heading">
                             <h2 class="body-detail-member-title">Classmates</h2>
                             <div class="body-detail-student-quantity">
-                                4 <span>students</span>
+                                4 <span class="body-detail-student-quantity-title">students</span>
+                                <i class="fas fa-user-plus body-detail-student-icon-add"></i>
                             </div>
                         </div>
                         <hr class="body-detail-separator-classmate">
@@ -121,5 +109,7 @@
             
         </div>
     </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
