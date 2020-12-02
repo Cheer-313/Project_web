@@ -142,31 +142,16 @@
 
             <h4 class="modal-list-class-name">Enrolled</h4>
             <ul class="modal-list-class-body-list">
-                <?php
-                $email = $data['email'];
-                $result = load_data_home($email,get_permission($email));
-                if(!empty($result)){
-                    while ($row = $result->fetch_assoc()) {
-                        # code...
-                        $classname = $row['classname'];
-                        $email = $row['email'];
-                        $token = $row['token'];
-                        $fullname = get_fullname($email);
-                        echo <<<EOT
-
-                                            <li class="modal-list-class-body-item">
-                                                <h4 class="modal-list-class-body-item-class">$classname</h4>
-                                                <h5 class="modal-list-class-body-item-name">$fullname</h5>
-                                            </li>
-                                         
-                                        
-                            EOT;
-                    }
-                }
-                ?>
-
+                <li class="modal-list-class-body-item">
+                    <h4 class="modal-list-class-body-item-class">HK1_2020_503040_Phân tích và thiết kế giải thuật_N02_1</h4>
+                    <h5 class="modal-list-class-body-item-name">Trịnh Hùng Cường</h5>
+                </li>
+                <li class="modal-list-class-body-item">
+                    <h4 class="modal-list-class-body-item-class">HK1_2020_503040_Phân tích và thiết kế giải thuật_N02_1</h4>
+                    <h5 class="modal-list-class-body-item-name">Trịnh Hùng Cường</h5>
+                </li>
             </ul>
-
+            
         </div>
     </div>
     

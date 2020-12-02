@@ -211,6 +211,8 @@
 			return array('code' => 1, 'error' => 'Cant Execute');
 		}
 
+		$join_class = join_class($email, $token); // Thêm người tạo vào table user_classroom
+
 		return array('code' => 0, 'error' => 'Add class successfully');
 	}
 
@@ -294,9 +296,10 @@
 			return $result;
 		}
 		else if($permission == 1){
-			$sql = 'select * from classroom where email = ?';
+			//Lấy lớp học của giáo viên tạo
+			$sql = 'select * from classroom where email = ? or token in (select token from user_classroom where email = ?)';
 			$stm = $conn->prepare($sql);
-			$stm->bind_param('s',$email);
+			$stm->bind_param('ss',$email,$email);
 
 			if(!$stm->execute()){
 			return array('code' => 2, 'error' => 'Cant execute statement');
@@ -304,7 +307,7 @@
 
 			$result =  $stm->get_result();
 			return $result;
-		}
+			}
 
 		else if($permission == 2){
 			$sql = 'select * from classroom where token in (select token from user_classroom where email = ?)';
@@ -319,6 +322,24 @@
 			return $result;
 		}
 		
+	}
+
+	function load_data_user_people($token){
+		$sql = 'select * from user where email in (select email from user_classroom where token = ?)';
+		
+		$conn = open_db();
+		$stm = $conn->prepare($sql);
+		if($stm == false){
+			return array('code' => 1, 'error' => 'fail');
+		}
+		$stm->bind_param('s',$token);
+
+		if(!$stm->execute()){
+			return array('code' => 2, 'error' => 'Cant execute statement');
+		}
+		$result =  $stm->get_result();
+			return $result;
+
 	}
 
 	//Lay thong tin lop hoc theo token
@@ -343,29 +364,38 @@
 			if permision == 1 -> delete all data table classroom and user_classroom emmail = email.teacher
 			if permission = 2 => delete all data table user_classroom where token = token.classroom
 		*/
+		//Xóa luôn trong table user_classroom
 	    $sql = 'delete from classroom where token = ?';
 	    $conn = open_db();
 	    $stm = $conn -> prepare($sql);
 	    $stm -> bind_param('s',$token);
 	    if($stm -> execute()){
-	        return true;
+	    	$sql1 = 'delete from user_classroom where token = ?';
+	    	$conn = open_db();
+	    	$stm1 = $conn -> prepare($sql1);
+	    	$stm1 -> bind_param('s',$token);
+	    	if($stm1 -> execute()){
+	    		return true;
+	    	}
+	       	else{
+	       		return false;
+	       	}
         }
 	    else{
 	        return false;
         }
     }
+    
     function modify_class($classname, $subject, $classroom, $token, $chooseImage){
-	    $sql = "update classroom set classname =$classname,subject=$subject,classroom=$classroom,chooseImage=$chooseImage where token =?";
-        $conn = open_db();
-        $stm = $conn -> prepare($sql);
-        $stm -> bind_param('s',$token);
-        if($stm -> execute()){
-            echo "Update successful";
-            return true;
-        }
-        else{
-            echo "Update fail";
-            return false;
-        }
-    }
+	    $sql = "update classroom set classname = ?,subject= ?,room=?,img=? where token = ?";
+	    $conn = open_db();
+	    $stm = $conn->prepare($sql);
+	    $stm -> bind_param('sssss',$classname,  $subject,  $classroom, $chooseImage, $token);
+	    if($stm -> execute()){
+	        return true;
+	    }
+	    else{
+	        return false;
+	    }
+	}
  ?>

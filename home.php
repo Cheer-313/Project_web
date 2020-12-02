@@ -91,18 +91,19 @@
                     <!-- Đổ dữ liệu vào từng khung -->
                     <?php 
                         $email = $data['email'];
+                        $array = load_data_home($email,get_permission($email));
                         $result = load_data_home($email,get_permission($email));
                         if(!empty($result)){
                             while ($row = $result->fetch_assoc()) {
-                            # code...
                                 $classname = $row['classname'];
                                 $email = $row['email'];
                                 $token = $row['token'];
+                                $img = $row['img'];
                                 $fullname = get_fullname($email);
                                 echo <<<EOT
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                                         <div class="card-item">
-                                            <div class="card-item-img"></div>
+                                            <div class="card-item-img" style="background-image: url('$img')"></div>
                                             <div class="card-body">
                                                 <a href="" class="card-body-icon">
                                                     <i class="far fa-address-book"></i>
@@ -132,15 +133,31 @@
                                 EOT;
                             }
                         }
-                        if(isset($_POST['btnYes'])){
+
+                        //Romove Class
+                        if(isset($_POST['btn_remove_yes'])){
                             $result = delete_class($token);
                             if(!$result){
                                 echo'error';
                             }
                             unset($_POST);
-                            header("Location: home.php");
-                            exit();
                         }
+
+                        //Modify Class
+                        if(isset($_POST['classnameModify']) && isset($_POST['subjectModify']) && isset($_POST['classroomModify']) && isset($_POST['chooseImageModify'])){
+
+                                $classnameModify = $_POST['classnameModify'];
+                                $subjectModify = $_POST['subjectModify'];
+                                $classroomModify = $_POST['classroomModify'];
+                                $chooseImageModify = $_POST['chooseImageModify'];
+
+                                $result = modify_class($classnameModify, $subjectModify, $classroomModify, $token, $chooseImageModify);
+
+                                if(!$result){
+                                    unset($_POST);
+                                }
+                            
+                            }
                      ?>
                 </div>
             </div>
@@ -227,16 +244,14 @@
                         </div>
 
                         <div class="auth-form__controls">
-                            <button class="btn-form-remove-class" name="btnYes">Yes</button>
+                            <button class="btn-form-remove-class" name="btn_remove_yes">Yes</button>
                             <button type="button" class="btn-form-remove-class btn-back">No</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Form modify -->
+            <!-- Form modify -->
             <div class="auth-form">
                 <div class="auth-form__container">
 
@@ -245,26 +260,26 @@
 
                         <div class="auth-form__form">
                             <div class="form-group">
-                                <label for="classname" class="form-label">Classname</label>
-                                <input type="text" name="classname" class="form-control" id="classname" placeholder="Enter your classname">
+                                <label for="classnameModify" class="form-label">Classname</label>
+                                <input type="text" name="classnameModify" class="form-control" id="classnameModify" placeholder="Enter your classname">
                                 <span class="form-message"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="subject" class="form-label">Subject</label>
-                                <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject title">
+                                <label for="subjectModify" class="form-label">Subject</label>
+                                <input type="text" name="subjectModify" class="form-control" id="subjectModify" placeholder="Subject title">
                                 <span class="form-message"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="classroom" class="form-label">Classroom</label>
-                                <input type="text" name="classroom" class="form-control" id="classroom" placeholder="Classroom">
+                                <label for="classroomModify" class="form-label">Classroom</label>
+                                <input type="text" name="classroomModify" class="form-control" id="classroomModify" placeholder="Classroom">
                                 <span class="form-message"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="chooseImage" class="form-label">Images</label>
-                                <select name="chooseImage" id="chooseImage" class="form-control">
+                                <label for="chooseImageModify" class="form-label">Images</label>
+                                <select name="chooseImageModify" id="chooseImageModify" class="form-control">
                                     <option value="images/img_violin2.jpg">Image violin</option>
                                     <option value="images/img_learnlanguage.jpg">Image learn language</option>
                                     <option value="images/img_breakfast.jpg">Image breakfast</option>
@@ -274,13 +289,60 @@
 
                         <div class="auth-form__controls">
                             <button type="button" class="btn-form-add-class btn-back">Back</button>
-                            <button class="btn-form-add-class">Modify</button>
+                            <button class="btn-form-add-class" >Modify</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal list class -->
+   <div class="modal-list-class">
+    <div class="modal-list-class-body">
+        <div class="modal-list-class-title">
+            <i class="fas fa-home" class="modal-list-class-title-icon"></i>
+            <h5 class="modal-list-class-title-heading">Classes</h5>
+        </div>
+
+        <hr class="body-detail-separator-list">
+
+        <div class="form-group form-group-search">
+            <label for="searchClass" class="form-label">Search</label>
+            <input type="text" name="searchClass" class="form-control" id="searchClass" placeholder="Search...">
+            <span class="form-message"></span>
+        </div>
+
+        <h4 class="modal-list-class-name">Enrolled</h4>
+        <ul class="modal-list-class-body-list">
+            <?php
+            $email = $data['email'];
+            $result = load_data_home($email,get_permission($email));
+            if(!empty($result)){
+                while ($row = $result->fetch_assoc()) {
+                    # code...
+                    $classname = $row['classname'];
+                    $email = $row['email'];
+                    $token = $row['token'];
+                    $fullname = get_fullname($email);
+                    echo <<<EOT
+
+                                        <li class="modal-list-class-body-item">
+                                            <h4 class="modal-list-class-body-item-class">$classname</h4>
+                                            <h5 class="modal-list-class-body-item-name">$fullname</h5>
+                                        </li>
+                                     
+                                    
+                        EOT;
+                }
+            }
+            ?>
+
+        </ul>
+
+        </div>
+    </div>
+    <div class="modal__list"> </div>
 
     <script src="main.js"></script>
 </body>

@@ -200,9 +200,18 @@ checkInput({
     form: '#form-modify',
     errorSelector: '.form-message',
     rules: [
-        checkInput.isRequired('#classname'),
-        checkInput.isRequired('#subject'),
-        checkInput.isRequired('#classroom')
+        checkInput.isRequired('#classnameModify'),
+        checkInput.isRequired('#subjectModify'),
+        checkInput.isRequired('#classroomModify')
+    ]
+});
+
+checkInput({
+    form: '#form-add-member',
+    errorSelector: '.form-message',
+    rules: [
+        checkInput.isRequired('#email'),
+        checkInput.isEmail('#email')
     ]
 });
 
@@ -323,21 +332,102 @@ cartItemModifyElement.forEach(function (item) {
 // Xử lý add student
 var iconAddStudentElement = document.querySelectorAll('.body-detail-student-quantity');
 var modalAddStudentElement = document.querySelector('.modal__plus.modal__add-student');
-console.log(modalAddStudentElement)
-console.log(iconAddStudentElement)
 var formAddStudent = document.querySelector('#form-add-member');
 var btnBackAddStudentElement = document.querySelector('#form-add-member .btn-back');
 
 iconAddStudentElement.forEach(function(icon) {
-    console.log(icon)
     icon.onclick = function () {
-        console.log('hi')
         modalAddStudentElement.style.visibility = 'visible';
         modalAddStudentElement.style.display = '';
         formAddStudent.style.display = 'block';
     }
 
-    btnBackAddStudentElement.onclick = function() {
-        modalAddStudentElement.style.display = 'none';
-    }
+    if (btnBackAddStudentElement) {
+        btnBackAddStudentElement.onclick = function() {
+            modalAddStudentElement.style.display = 'none';
+        }
+    }  
 });
+
+// Xử lý icon hamburger
+var iconHamburElement = document.querySelector('.header__list-left-item:first-child');
+var leftDownElement = document.querySelector('.modal-list-class');
+var spaceElement = document.querySelector('.modal__list');
+
+if (iconHamburElement) {
+    iconHamburElement.onclick = function () {
+        leftDownElement.style.display = 'block';
+        leftDownElement.style.visibility = 'visible';
+        spaceElement.style.display = 'block';
+    }
+}
+
+if (leftDownElement) {
+    spaceElement.onclick = function () {
+        leftDownElement.style.display = 'none';
+        leftDownElement.style.visibility = 'hidden';
+        spaceElement.style.display = 'none';
+    }
+}
+
+// iconHamburElement.forEach(function (item) {
+//     iconHamburElement.onclick = function () {
+//         leftDownElement.style.display = 'block';
+//         leftDownElement.style.visibility = 'visible';
+//     }
+
+//     if (leftDownElement) {
+//         var spaceElement = document.querySelector('.modal__list');
+//         spaceElement.onclick = function () {
+//             console.log('hiiiiii')
+//             leftDownElement.style.display = 'none';
+//             leftDownElement.style.visibility = 'hidden';
+//         }
+//     }
+// });
+
+// Xử lý button create assignment
+var btnCreateAssElement = document.querySelector('.btn-create-assignment');
+var btnBackAssElement = document.querySelector('.btn-back-assignment');
+
+if (btnCreateAssElement) {
+    btnCreateAssElement.onclick = function () {
+        ModalElement.style.visibility = 'visible';
+    }
+
+    if (btnBackAssElement) {
+        btnBackAssElement.onclick = function () {
+            ModalElement.style.visibility = 'hidden';
+        }
+    }
+}
+
+
+// Hàm chức năng tìm kiếm
+function searchClass() {
+    var input, filter, ul, li, h4, h5, i, txtValue;
+    input = document.getElementById('searchClass');
+    filter = input.value.toUpperCase();
+    ul = document.querySelector('.modal-list-class-body-list');
+    li = ul.querySelectorAll('.modal-list-class-body-item');
+
+    li.forEach(function (item) {
+        h4 = item.querySelector('.modal-list-class-body-item-class');
+        if (h4) {
+            txtValue = h4.textContent || h4.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        }
+    });
+}
+
+var inputSearchElement = document.querySelector('#searchClass');
+
+if (inputSearchElement) {
+    inputSearchElement.onkeyup = function () {
+        searchClass();
+    }
+}
