@@ -1,9 +1,9 @@
 <?php
     session_start();
-    /*if(isset($_SESSION['username'])){
+    if(isset($_SESSION['username'])){
         header('Location: home.php');
         exit();
-   }*/
+    }
    require_once("db.php");
 ?>
 <!DOCTYPE html>

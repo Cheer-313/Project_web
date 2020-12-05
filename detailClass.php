@@ -1,7 +1,11 @@
 <?php
     session_start();
+    if(!isset($_SESSION['username'])){
+        header('Location: signIn.php');
+        exit();
+    }
     require_once("db.php");
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,15 +23,16 @@
     <?php 
         $data = $_SESSION['data'];
         $fullname_user = $data['hoten'];
-        $token = '';
-        $fullname= '';
-        $classname = '';
+        $token = ' ';
+        $fullname= ' ';
+        $classname = ' ';
 
         if(isset($_GET['token'])){
             $token = $_GET['token'];
             $result = get_detail_class($token);
             $classname = $result['classname'];
             $fullname = get_fullname($result['email']);
+            $img = $result['img'];
         }
      ?>
     <div class="home-app">
@@ -44,7 +49,7 @@
 
             <ul class="header__list-center">
                     <li class="header__list-center-item">
-                        <a href="http://localhost:8088/Project_web/detailClass.php?token= <?=$token?>" class="header__list-center-item-link">Stream</a>
+                        <a href="" class="header__list-center-item-link">Stream</a>
                     </li>
                     <li class="header__list-center-item">
                         <a href="" class="header__list-center-item-link">Classwork</a>
@@ -58,7 +63,13 @@
                 <li class="header__list-right-item">
                     <img src="https://img.icons8.com/material/24/000000/circled-menu.png" class="header__list-right-item-img">
                 </li>
-                <li class="header__list-right-item header__list-right-item-name"><?= $fullname_user ?></li>
+                <li class="header__list-right-item header__list-right-item-name"><?= $fullname_user ?>
+                    <div class="header__list-right-item-logout">
+                        <span class="header__list-right-item-name-logout">
+                            <a class="header__list-right-item-name-logout-link" href="logout.php">Log out</a>
+                        </span>
+                    </div>
+                </li>
             </ul>
         </header>
 
@@ -66,7 +77,7 @@
             <div class="grid grid-detailClass">
                 <div class="grid__row-detail">
                     <div class="app-container-body-detail">
-                        <img src="images/img_learnlanguage.jpg" alt="" class="body-detail-img"></img>
+                        <img src="<?= $img ?>" alt="" class="body-detail-img"></img>
 
                         <div class="body-detail-title">
                             <h2 class="body-detail-title-heading"><?= $classname ?></h2>
@@ -182,14 +193,14 @@
                                 </div>
                             </div>
 
-                            <a href="">
+                            <a href="" class="detail-assignment-link">
                                 <div class="grid__right-item">
                                     <h4 class="grid__right-item-heading">Trịnh Hùng Cường posted a new assignment: Nộp lab 10</h4>
                                     <h5 class="grid__right-item-time">Nov 7</h5>
                                 </div>
                             </a>
 
-                            <a href="">
+                            <a href="" class="detail-assignment-link">
                                 <div class="grid__right-item">
                                     <h4 class="grid__right-item-heading">Trịnh Hùng Cường posted a new assignment: Nộp lab 9</h4>
                                     <h5 class="grid__right-item-time">Nov 1</h5>
@@ -247,10 +258,10 @@
     <!-- Modal list class -->
     <div class="modal-list-class">
         <div class="modal-list-class-body">
-            <div class="modal-list-class-title">
+            <a href="home.php" class="modal-list-class-title">
                 <i class="fas fa-home" class="modal-list-class-title-icon"></i>
                 <h5 class="modal-list-class-title-heading">Classes</h5>
-            </div>
+            </a>
 
             <hr class="body-detail-separator-list">
 

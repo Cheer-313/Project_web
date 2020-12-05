@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['username'])){
+        header('Location: signIn.php');
+        exit();
+    }
+    require_once("db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +48,13 @@
                 <li class="header__list-right-item">
                     <img src="https://img.icons8.com/material/24/000000/circled-menu.png" class="header__list-right-item-img">
                 </li>
-                <li class="header__list-right-item header__list-right-item-name">Trương Minh Hưng</li>
+                <li class="header__list-right-item header__list-right-item-name">Trương Minh Hưng
+                    <div class="header__list-right-item-logout">
+                        <span class="header__list-right-item-name-logout">
+                            <a class="header__list-right-item-name-logout-link" href="logout.php">Log out</a>
+                        </span>
+                    </div>
+                </li>
             </ul>
         </header>
 
@@ -94,10 +108,10 @@
     <!-- Modal list class -->
     <div class="modal-list-class">
         <div class="modal-list-class-body">
-            <div class="modal-list-class-title">
+            <a href="home.php" class="modal-list-class-title">
                 <i class="fas fa-home" class="modal-list-class-title-icon"></i>
                 <h5 class="modal-list-class-title-heading">Classes</h5>
-            </div>
+            </a>
 
             <hr class="body-detail-separator-list">
 

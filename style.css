@@ -280,10 +280,14 @@ html {
 
 /* Home CSS */
 .home-app {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(images/backgr_home.png);
   background-size: cover;
   background-repeat: round;
+}
+
+.home-app-people {
+  background: white no-repeat center center;
 }
 
 .home-app .header-home {
@@ -305,6 +309,8 @@ html {
   list-style: none;
   padding-right: 24px;
   margin-bottom: 0;
+  width: 550px;
+  justify-content: flex-end;
 }
 
 .header-home .header__list-left {
@@ -313,6 +319,7 @@ html {
   list-style: none;
   padding-left: 24px;
   margin-bottom: 0;
+  width: 550px;
 }
 
 .header__list-left-item {
@@ -391,6 +398,50 @@ html {
 
 .header__list-right-item-name {
   font-size: 1.4rem;
+  position: relative;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.header__list-right-item-name:hover .header__list-right-item-logout {
+  display: block;
+}
+
+.header__list-right-item-logout {
+  cursor: pointer;
+  position: absolute;
+  top: 120%;
+  right: 10px;
+  border-radius: 4px;
+  min-width: 60%;
+  text-align: center;
+  padding: 6px 12px;
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 4px 0 rgb(51, 62, 73);
+  display: none;
+}
+
+.header__list-right-item-logout::before {
+  content: '';
+  border-width: 12px 20px;
+  border-color: transparent transparent #f1f1f1 transparent;
+  border-style: solid;
+  position: absolute;
+  top: -18px;
+  right: 0px;
+}
+
+.header__list-right-item-logout::after {
+  content: '';
+  width: 70px;
+  height: 10px;
+  position: absolute;
+  top: -7px;
+  right: 0px;
+}
+
+.header__list-right-item-logout:hover {
+  background-color: #f1f1f1;
 }
 
 /*  */
@@ -667,7 +718,6 @@ html {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 0;
-  margin-right: 304px;
 }
 
 .header__list-center-item {
@@ -1007,6 +1057,14 @@ html {
   cursor: pointer;
 }
 
+.detail-assignment-link {
+  text-decoration: none;
+}
+
+.detail-assignment-link:hover {
+  text-decoration: none;
+}
+
 /* Home -> Modal list class */
 .modal__list {
   position: fixed;
@@ -1019,11 +1077,11 @@ html {
 }
 
 .modal-list-class {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   width: 304px;
   z-index: 1;
   display: none;
@@ -1042,10 +1100,15 @@ html {
   border-top-right-radius: 24px;
   /* border: 1px solid rgba(0, 0, 0, 0.15); */
   border-left: none;
+  text-decoration: none;
+  color: #333;
 }
 
 .modal-list-class-title:hover {
   background-color: #dadce0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
 }
 
 .modal-list-class-title svg {
@@ -1083,7 +1146,7 @@ html {
 }
 
 .modal-list-class-body-item {
-  padding: 8px 0 8px 16px;
+  padding: 1px 0 1px 16px;
   border-top: 1px solid #ccc;
 }
 
@@ -1174,6 +1237,7 @@ html {
 .form-submit-file-assignment-state {
   margin: 0;
   font-weight: bold;
+  color: green;
 }
 
 .form-submit-file-assignment-addFolder {
@@ -1207,6 +1271,37 @@ html {
   border: 1px solid #333;
   color: white;
   background: var(--primary-button);
+}
+
+#form-modify {
+  width: 450px;
+}
+
+.main.main-form-modify-class {
+  background: #f1f1f1;
+}
+.alert-message {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  background: #f5f5f5;
+  color: #4caf50;
+  z-index: 10;
+  font-weight: bold;
+}
+
+.header__list-right-item-name-logout-link {
+  color: #333;
+}
+
+.header__list-right-item-name-logout-link:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-modify-item-home:hover {
+  text-decoration: none;
 }
 
 /* Responsive */

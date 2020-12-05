@@ -229,7 +229,7 @@ if (plusAddElement) {
         ModalElement.style.display = '';
         formjoinElenment.style.display = 'none';
         formremoveElement.style.display = 'none';
-        formModifyElenment.style.display = 'none';
+        // formModifyElenment.style.display = 'none';
         formaddElenment.style.display = 'block';
     }
 }
@@ -253,7 +253,7 @@ if (plusJoinElement) {
         ModalElement.style.display = '';
         formaddElenment.style.display = 'none';
         formremoveElement.style.display = 'none';
-        formModifyElenment.style.display = 'none';
+        // formModifyElenment.style.display = 'none';
         formjoinElenment.style.display = 'block';
     }
 }
@@ -275,7 +275,7 @@ cartItemRemoveElement.forEach(function (item) {
         ModalElement.style.display = '';
         formaddElenment.style.display = 'none';
         formjoinElenment.style.display = 'none';
-        formModifyElenment.style.display = 'none';
+        // formModifyElenment.style.display = 'none';
         formremoveElement.style.display = 'block';
     }
 
@@ -285,24 +285,29 @@ cartItemRemoveElement.forEach(function (item) {
 });
 
 // Xử lý modify class
-var cartItemModifyElement = document.querySelectorAll('.card-item-dropdown-item-modify');
-var btnBackModifyElement = document.querySelector('#form-modify .btn-back');
-var formModifyElenment = document.querySelector('#form-modify');
+// var cartItemModifyElement = document.querySelectorAll('.card-item-dropdown-item-modify');
+// var btnBackModifyElement = document.querySelector('#form-modify .btn-back');
+// var formModifyElenment = document.querySelector('#form-modify');
+// console.log(cartItemModifyElement);
+// console.log(btnBackModifyElement);
+// console.log(formModifyElenment);
 
-cartItemModifyElement.forEach(function (item) {
-    item.onclick = function () {
-        ModalElement.style.visibility = 'visible';
-        ModalElement.style.display = '';
-        formaddElenment.style.display = 'none';
-        formjoinElenment.style.display = 'none';
-        formremoveElement.style.display = 'none';
-        formModifyElenment.style.display = 'block';
-    }
+// cartItemModifyElement.forEach(function (item) {
+//     console.log(item)
+//     console.log('hi')
+//     item.onclick = function () {
+//         ModalElement.style.visibility = 'visible';
+//         ModalElement.style.display = '';
+//         formaddElenment.style.display = 'none';
+//         formjoinElenment.style.display = 'none';
+//         formremoveElement.style.display = 'none';
+//         formModifyElenment.style.display = 'block';
+//     }
 
-    btnBackModifyElement.onclick = function () {
-        ModalElement.style.display = 'none';
-    }
-});
+//     btnBackModifyElement.onclick = function () {
+//         ModalElement.style.display = 'none';
+//     }
+// });
 // Xử lý trong detail class
 // var homeAppStreamElement = document.querySelector('.home-app-stream');
 // var homeAppPeopleElement = document.querySelector('.home-app-list-member');

@@ -30,7 +30,7 @@
             $fullname = get_fullname($result['email']);
         }
      ?>
-    <div class="home-app">
+    <div class="home-app home-app-people">
         <header class="header-home">
             <ul class="header__list-left">
                 <li class="header__list-left-item">
@@ -58,7 +58,11 @@
                 <li class="header__list-right-item">
                     <img src="https://img.icons8.com/material/24/000000/circled-menu.png" class="header__list-right-item-img">
                 </li>
-                <li class="header__list-right-item header__list-right-item-name"><?= $fullname_user ?></li>
+                <li class="header__list-right-item header__list-right-item-name"><?= $fullname_user ?>
+                    <div class="header__list-right-item-logout">
+                        <span class="header__list-right-item-name-logout">Log out</span>
+                    </div>
+                </li>
             </ul>
         </header>
         <?php 
@@ -127,10 +131,10 @@
     <!-- Modal list class -->
     <div class="modal-list-class">
         <div class="modal-list-class-body">
-            <div class="modal-list-class-title">
+            <a href="" class="modal-list-class-title">
                 <i class="fas fa-home" class="modal-list-class-title-icon"></i>
                 <h5 class="modal-list-class-title-heading">Classes</h5>
-            </div>
+            </a>
 
             <hr class="body-detail-separator-list">
 
